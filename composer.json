@@ -1,11 +1,11 @@
 {
-	"name": "iignatov/lightopenid",
+	"name": "juneym/lightopenid",
 	"type": "library",
 	"description": "Lightweight PHP5 library for easy OpenID authentication.",
 	"keywords": ["openid", "authentication", "security"],
-	"homepage": "https://github.com/iignatov/LightOpenID",
+	"homepage": "https://github.com/juneym/LightOpenID",
 	"license": "MIT",
-	"version": "1.3.1",
+	"version": "1.3.2",
 	"authors": [
 		{
 			"name": "Mewp",
