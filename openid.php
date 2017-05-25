@@ -41,6 +41,13 @@ class LightOpenID
         'pref/timezone'           => 'timezone',
         );
 
+    /**
+     * Provider Parameters
+     *
+     * @var array
+     */
+    protected $providerParams = array();
+
     function __construct($host, $proxy = null)
     {
         $this->set_realm($host);
@@ -812,7 +819,11 @@ class LightOpenID
             'openid.return_to'   => $this->returnUrl,
             'openid.realm'       => $this->trustRoot,
         );
-        
+
+        if (!empty($this->providerParams)) {
+            $params += $this->providerParams;
+        }
+
         if ($this->ax) {
             $params += $this->axParams();
         }
@@ -1072,5 +1083,17 @@ class LightOpenID
     private function getItem($id)
     {
         return isset($this->data[$id]) ? $this->data[$id] : null; 
+    }
+
+    /**
+     * Set the Provider parametes usually extensions parameters
+     *
+     * @param array $params
+     * @return $this
+     */
+    public function setProviderParams(array $params)
+    {
+        $this->providerParams  = $params;
+        return $this;
     }
 }
