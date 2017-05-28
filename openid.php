@@ -54,13 +54,32 @@ class LightOpenID
         $this->set_proxy($proxy);
 
         $uri = rtrim(preg_replace('#((?<=\?)|&)openid\.[^&]+#', '', $_SERVER['REQUEST_URI']), '?');
-        $this->returnUrl = $this->trustRoot . $uri;
+        $this->set_return_url($this->trustRoot . $uri);
 
-        $this->data = ($_SERVER['REQUEST_METHOD'] === 'POST') ? $_POST : $_GET;
+        $this->set_data(($_SERVER['REQUEST_METHOD'] === 'POST') ? $_POST : $_GET);
 
         if(!function_exists('curl_init') && !in_array('https', stream_get_wrappers())) {
             throw new ErrorException('You must have either https wrappers or curl enabled.');
         }
+    }
+
+    /**
+     * Set the return url
+     *
+     * @param string $full_url
+     */
+    public function set_return_url($full_url)
+    {
+        $this->returnUrl = $full_url;
+    }
+
+    /**
+     * Set the data parameters
+     *
+     * @param array $data
+     */
+    public function set_data(array $data) {
+        $this->data = $data;
     }
     
     function __isset($name)
